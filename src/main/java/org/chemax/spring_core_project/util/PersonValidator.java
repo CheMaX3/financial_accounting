@@ -1,7 +1,7 @@
-package org.chemax.financial_accounting.util;
+package org.chemax.spring_core_project.util;
 
-import org.chemax.financial_accounting.dao.PersonDAO;
-import org.chemax.financial_accounting.models.Person;
+import org.chemax.spring_core_project.dao.PersonDAO;
+import org.chemax.spring_core_project.models.Person;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

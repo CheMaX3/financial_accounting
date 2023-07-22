@@ -1,4 +1,4 @@
-package org.chemax.financial_accounting.models;
+package org.chemax.spring_core_project.models;
 
 import jakarta.validation.constraints.*;
 

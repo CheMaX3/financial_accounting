@@ -1,4 +1,4 @@
-package org.chemax.financial_accounting.config;
+package org.chemax.spring_core_project.config;
 
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.FilterRegistration;

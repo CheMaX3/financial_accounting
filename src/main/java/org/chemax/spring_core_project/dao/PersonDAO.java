@@ -1,6 +1,6 @@
-package org.chemax.financial_accounting.dao;
+package org.chemax.spring_core_project.dao;
 
-import org.chemax.financial_accounting.models.Person;
+import org.chemax.spring_core_project.models.Person;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

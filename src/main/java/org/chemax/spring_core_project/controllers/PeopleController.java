@@ -1,9 +1,9 @@
-package org.chemax.financial_accounting.controllers;
+package org.chemax.spring_core_project.controllers;
 
 import jakarta.validation.Valid;
-import org.chemax.financial_accounting.dao.PersonDAO;
-import org.chemax.financial_accounting.models.Person;
-import org.chemax.financial_accounting.util.PersonValidator;
+import org.chemax.spring_core_project.dao.PersonDAO;
+import org.chemax.spring_core_project.models.Person;
+import org.chemax.spring_core_project.util.PersonValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

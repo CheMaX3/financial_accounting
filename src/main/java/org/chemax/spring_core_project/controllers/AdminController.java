@@ -1,7 +1,7 @@
-package org.chemax.financial_accounting.controllers;
+package org.chemax.spring_core_project.controllers;
 
-import org.chemax.financial_accounting.dao.PersonDAO;
-import org.chemax.financial_accounting.models.Person;
+import org.chemax.spring_core_project.dao.PersonDAO;
+import org.chemax.spring_core_project.models.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

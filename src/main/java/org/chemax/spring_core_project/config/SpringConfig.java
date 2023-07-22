@@ -1,4 +1,4 @@
-package org.chemax.financial_accounting.config;
+package org.chemax.spring_core_project.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.util.Objects;
 
 @Configuration
-@ComponentScan("org.chemax.financial_accounting")
+@ComponentScan("org.chemax.spring_core_project")
 @EnableWebMvc
 @PropertySource("classpath:database.properties")
 public class SpringConfig implements WebMvcConfigurer {
