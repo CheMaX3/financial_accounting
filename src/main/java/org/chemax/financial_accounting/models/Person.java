@@ -1,33 +1,36 @@
 package org.chemax.financial_accounting.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class Person {
 
     private Long id;
 
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30")
+    @NotEmpty(message = "Поле имя не может быть пустым")
+    @Size(min = 2, max = 30, message = "Имя должно быть не короче 2 и не длиннее 30 символов")
     private String name;
 
-    @Min(value = 0, message = "Age should be greater than 0")
+    @Min(value = 0, message = "Возраст должен быть больше 0")
     private int age;
 
-    @NotEmpty(message = "Email should not be empty")
-    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Поле электронная почта не может быть пустым")
+    @Email(message = "Электронная почта должна иметь формат: example@example.com")
     private String email;
+
+    @NotEmpty(message = "Поле адрес не может быть пустым")
+    @Pattern(regexp = "[А-Яа-я]+, [А-Яа-я]+, \\d{6}",
+            message = "Адрес должен иметь следующий формат: Страна, Город, Почтовый индекс (6 цифр)")
+    private String address;
 
     public Person() {
     }
 
-    public Person(Long id, String name, int age, String email) {
+    public Person(Long id, String name, int age, String email, String address) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.address = address;
     }
 
     public Long getId() {
@@ -60,5 +63,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
