@@ -1,9 +1,11 @@
 package org.chemax.spring_core_project.dao;
 
 import org.chemax.spring_core_project.models.Person;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,38 +13,56 @@ import java.util.Optional;
 @Component
 public class PersonDAO {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final SessionFactory sessionFactory;
 
-    public PersonDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public PersonDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
+    @Transactional(readOnly = true)
     public List<Person> index() {
-        return jdbcTemplate.query("SELECT * FROM person", new BeanPropertyRowMapper<>(Person.class));
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.createQuery("SELECT p FROM Person p", Person.class).getResultList();
     }
 
+    @Transactional(readOnly = true)
     public Person show(Long id) {
-        return jdbcTemplate.query("SELECT * FROM person WHERE id=?",
-                new BeanPropertyRowMapper<>(Person.class), new Object[]{id}).stream().findAny().orElse(null);
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.get(Person.class, id);
     }
 
+    @Transactional
     public Optional<Person> show(String email) {
-        return jdbcTemplate.query("SELECT * FROM person WHERE email=?", new BeanPropertyRowMapper<>(Person.class),
-                new Object[]{email}).stream().findAny();
+        Session session = sessionFactory.getCurrentSession();
+
+        return Optional.ofNullable(session.get(Person.class, email));
     }
 
+    @Transactional
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person(name, age, email, address) VALUES(?, ?, ?, ?)",
-                person.getName(), person.getAge(), person.getEmail(), person.getAddress());
+        Session session = sessionFactory.getCurrentSession();
+
+        session.persist(person);
     }
 
+    @Transactional
     public void update(Long id, Person updatedPerson) {
-        jdbcTemplate.update("UPDATE person SET name=?, age=?, email=?, address=? WHERE id=?",
-                updatedPerson.getName(), updatedPerson.getAge(), updatedPerson.getEmail(),
-                updatedPerson.getAddress(), id);
+        Session session = sessionFactory.getCurrentSession();
+        Person personToBeUpdated = session.get(Person.class, id);
+
+        personToBeUpdated.setName(updatedPerson.getName());
+        personToBeUpdated.setAge(updatedPerson.getAge());
+        personToBeUpdated.setEmail(updatedPerson.getEmail());
+        personToBeUpdated.setAddress(updatedPerson.getAddress());
     }
 
+    @Transactional
     public void delete(Long id) {
-        jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
+        Session session = sessionFactory.getCurrentSession();
+
+        session.remove(session.get(Person.class, id));
     }
 }
