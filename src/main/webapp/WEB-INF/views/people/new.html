@@ -22,6 +22,10 @@
     <input th:type="text" th:field="*{address}" th:id="address"/>
     <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address error</div>
     <br/>
+    <label th:value="date_of_birth">Введите дату рождения (дд/мм/гггг):</label>
+    <input th:type="text" th:field="*{dateOfBirth}" th:id="date_of_birth"/>
+    <div style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">dateOfBirth error</div>
+    <br/>
   <input th:type="submit" th:value="Создать"/>
 </form>
 </body>
